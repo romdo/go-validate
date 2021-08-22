@@ -1,5 +1,5 @@
 <h1 align="center">
-  romdo/go-validate
+  go-validate
 </h1>
 
 <p align="center">
@@ -9,7 +9,31 @@
   </strong>
 </p>
 
----
+<p align="center">
+  <a href="https://pkg.go.dev/github.com/romdo/go-validate">
+    <img src="https://img.shields.io/badge/%E2%80%8B-reference-387b97.svg?logo=go&logoColor=white"
+  alt="Go Reference">
+  </a>
+  <a href="https://github.com/romdo/go-validate/releases">
+    <img src="https://img.shields.io/github/v/tag/romdo/go-validate?label=release" alt="GitHub tag (latest SemVer)">
+  </a>
+  <a href="https://github.com/romdo/go-validate/actions">
+    <img src="https://img.shields.io/github/workflow/status/romdo/go-validate/CI.svg?logo=github" alt="Actions Status">
+  </a>
+  <a href="https://codeclimate.com/github/romdo/go-validate">
+    <img src="https://img.shields.io/codeclimate/coverage/romdo/go-validate.svg?logo=code%20climate" alt="Coverage">
+  </a>
+  <a href="https://github.com/romdo/go-validate/issues">
+    <img src="https://img.shields.io/github/issues-raw/romdo/go-validate.svg?style=flat&logo=github&logoColor=white"
+alt="GitHub issues">
+  </a>
+  <a href="https://github.com/romdo/go-validate/pulls">
+    <img src="https://img.shields.io/github/issues-pr-raw/romdo/go-validate.svg?style=flat&logo=github&logoColor=white" alt="GitHub pull requests">
+  </a>
+  <a href="https://github.com/romdo/go-validate/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/romdo/go-validate.svg?style=flat" alt="License Status">
+  </a>
+</p>
 
 Add validation to any type, by simply implementing the `Validatable` interface:
 
