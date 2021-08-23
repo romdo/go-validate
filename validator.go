@@ -83,7 +83,7 @@ func (s *Validator) validate(path []string, data interface{}) error {
 			e := &Error{}
 			if ok := errors.As(err, &e); ok {
 				field := e.Field
-				if field != "" {
+				if field != "" && d.Kind() == reflect.Struct {
 					if sf, ok := d.Type().FieldByName(e.Field); ok {
 						field = s.fieldName(sf)
 					}

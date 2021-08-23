@@ -2,6 +2,7 @@ package validate_test
 
 import (
 	"errors"
+	"fmt"
 	"strings"
 	"testing"
 
@@ -38,6 +39,29 @@ func (s *validatableStruct) Validate() error {
 	}
 
 	return s.f()
+}
+
+type validatableSlice []validatableStruct
+
+func (s validatableSlice) Validate() error {
+	var errs error
+
+	if len(s) < 1 {
+		errs = validate.AppendError(errs, "must contain at least 1 item")
+	}
+
+	fooVals := map[string]bool{}
+	for i, item := range s {
+		if fooVals[item.Foo] {
+			errs = validate.Append(errs, &validate.Error{
+				Field: fmt.Sprintf("%d.Foo", i),
+				Msg:   "is not unique",
+			})
+		}
+		fooVals[item.Foo] = true
+	}
+
+	return errs
 }
 
 type nestedStruct struct {
@@ -120,6 +144,31 @@ func TestValidate(t *testing.T) {
 			obj:  validatableString("hello world"),
 			wantErrs: []error{
 				&validate.Error{Msg: "must not contain space"},
+			},
+		},
+		{
+			name: "valid validatable slice type",
+			obj: validatableSlice{
+				{Foo: "Hello"},
+				{Foo: "World"},
+			},
+			wantErrs: []error{},
+		},
+		{
+			name: "invalid validatable slice type",
+			obj:  validatableSlice{},
+			wantErrs: []error{
+				&validate.Error{Msg: "must contain at least 1 item"},
+			},
+		},
+		{
+			name: "invalid validatable slice type with custom field error",
+			obj: validatableSlice{
+				{Foo: "Hello"},
+				{Foo: "Hello"},
+			},
+			wantErrs: []error{
+				&validate.Error{Field: "1.Foo", Msg: "is not unique"},
 			},
 		},
 		{
